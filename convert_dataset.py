@@ -16,6 +16,7 @@ def main():
             os.mkdir(os.path.join(data_dir_new, class_label))
         shutil.copy(os.path.join(data_dir_orig, file), os.path.join(data_dir_new, class_label, file))
 
+
 def get_class_label(anno_path):
     tree = ET.parse(anno_path)
     root = tree.getroot()
@@ -24,3 +25,7 @@ def get_class_label(anno_path):
     name = object_1.find("name").text
     print(name)
     return name
+
+
+if __name__ == "__main__":
+    main()
