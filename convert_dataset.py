@@ -11,7 +11,7 @@ def main():
     for file in os.listdir(data_dir_orig):
         print(file)
         file_name = file[:-4]
-        val_name = file_name + ".xml"
+        val_name = file_name + "xml"
         class_label = get_class_label(anno_dir + val_name)
         if not os.path.isdir(os.path.join(data_dir_new, class_label)):
             os.mkdir(os.path.join(data_dir_new, class_label))
