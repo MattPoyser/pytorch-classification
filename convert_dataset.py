@@ -7,6 +7,7 @@ def main():
     anno_dir = "/home2/lgfm95/ILSVRC/Annotations/CLS-LOC/val/"
     data_dir_orig = "/home2/lgfm95/ILSVRC/Data/CLS-LOC/val/1"
     data_dir_new = "/home2/lgfm95/ILSVRC/Data/CLS-LOC/val/full"
+    print(data_dir_orig)
     for file in os.listdir(data_dir_orig):
         print(file)
         file_name = file[:-4]
