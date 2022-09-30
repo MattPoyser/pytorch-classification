@@ -23,6 +23,8 @@ import models.imagenet as customized_models
 
 from utils import Bar, Logger, AverageMeter, accuracy, mkdir_p, savefig
 
+import sys
+from models.supernet.search_cnn import SearchCNNController
 # Models
 default_model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
@@ -37,6 +39,8 @@ for name in customized_models.__dict__:
         models.__dict__[name] = customized_models.__dict__[name]
 
 model_names = default_model_names + customized_models_names
+model_names.append("supernet")
+
 
 # Parse arguments
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
@@ -149,6 +153,10 @@ def main():
                     baseWidth=args.base_width,
                     cardinality=args.cardinality,
                 )
+    elif "supernet" in args.arch:
+        net_crit = nn.CrossEntropyLoss().cuda()
+        model = SearchCNNController(3, 16, 1000, 12, net_crit, device_ids=0, n_nodes=8)
+
     else:
         print("=> creating model '{}'".format(args.arch))
         model = models.__dict__[args.arch]()
