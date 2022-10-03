@@ -155,7 +155,7 @@ def main():
                 )
     elif "supernet" in args.arch:
         net_crit = nn.CrossEntropyLoss().cuda()
-        model = SearchCNNController(3, 16, 1000, 12, net_crit, device_ids=0, n_nodes=8)
+        model = SearchCNNController(C_in=3, C=16, n_classes=1000, n_layers=12, criterion=net_crit, n_nodes=8)
 
     else:
         print("=> creating model '{}'".format(args.arch))
